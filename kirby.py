@@ -3,6 +3,12 @@ import pygame
 import time
 import random
 
+
+def show_text(msg,x,y,color):
+    fontobj=pygame.font.SysFont("freesans",26)
+    msgobj=fontobj.render(msg,False,color)
+    screen.blit(msgobj,(x,y))
+
 class platforms:
     def __init__(self):
         self.r1=(0,420,100,480)
@@ -41,8 +47,8 @@ class kirby:
             self.i=14
         if self.i==18:
             self.i=15
-        
 screen=pygame.display.set_mode((640,480))
+pygame.init()
 img=[]
 k1=kirby(0,400)
 n=0
@@ -53,7 +59,9 @@ up=0
 right=0
 y=400
 l=[]
+s=0
 j=0
+h=0
 for n in range(0,3,1):
     l.append(pygame.image.load('kirby1.png'))
 t=0
@@ -63,7 +71,7 @@ pink=(220,30,150)
 fpsclock=pygame.time.Clock()
 for n in range(0,19,1):
     img.append(pygame.image.load('kirby'+str(n+1)+'.png'))
-p = platforms()
+p=platforms()
 
 while True:
     k1.kirbyrefresh()
@@ -119,9 +127,12 @@ while True:
         k1.moveright()
     if right and (k1.y<p.r4[1] and k1.x+20<700):
         k1.moveright()
+        
     if up:
         k1.moveup()
-    
+        
+    show_text("score:"+str(s),100,10,(100,35,0))
+
     if k1.y>480:
         k1.x=0
         k1.y=250
@@ -132,8 +143,9 @@ while True:
         for n in range(0,3,1):
             l.append(pygame.image.load('kirby1.png'))
         p.RedrawPlatform()
-          
+
     if k1.x>640:
+        s=s+50
         k1.x=0
         k1.y=270
         p.RedrawPlatform()
