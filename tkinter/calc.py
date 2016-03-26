@@ -7,7 +7,8 @@ def m():
     1
 
 def  one():
-    e1.insert("A")
+    global x
+    e1.insert(0,x)
 
 
 e1=Entry(master)
