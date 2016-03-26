@@ -5,6 +5,7 @@ master=Tk()
 x=0
 
 def t():
+    global x
     x=e1.get()
     e1.delete(0,END)
     l2=Label(master,text=x).grid(row=1)
@@ -15,7 +16,8 @@ def t():
         master.update()
         
 def r():
-    x=x-x
+    global x
+    x=0
     l2=Label(master,text=x).grid(row=1)
     master.update()
     
