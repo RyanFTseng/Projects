@@ -42,10 +42,11 @@ def eq():
     global o
     x=e1.get()
     e1.delete(0,END)
-    if o==1:
+    #if o==1:
+    if '+' in x:
         a,b=x.split('+')
         e1.insert(END,int(a)+int(b))
-    if o==2:
+    if '-' in x:
         a,b=x.split('-')
         e1.insert(END,int(a)-int(b))
     if o==3:
