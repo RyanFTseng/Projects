@@ -1,7 +1,8 @@
 from tkinter import*
 master=Tk()
 x=0
-o=0
+
+#o=0
 def  one():
     e1.insert(END,1)
 def two():
@@ -23,23 +24,23 @@ def nine():
 def zero():
     e1.insert(END,0)
 def plus():
-    global o
-    o=1
+    #global o
+    #o=1
     e1.insert(END,'+')
 def sub():
-    global o
-    o=2
+   # global o
+    #o=2
     e1.insert(END,'-')
 def mult():
-    global o
+    #global o
     o=3
     e1.insert(END,'*')
 def divd():
-    global o
-    o=4
+    #global o
+    #o=4
     e1.insert(END,'/')
 def eq():
-    global o
+    #global o
     x=e1.get()
     e1.delete(0,END)
     #if o==1:
