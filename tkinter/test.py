@@ -1,67 +1,44 @@
-v='32+3-2='
+v='3+3*3='
 l=list(v)
 var=''
 total=0
-current_operation='+'
 operate=0
-
+print(l)
 ltotal=[]
+ltotal.append(0)
 for i in l:
-
-      
-      '''if current_operation=='+' and operate==1:
-            total=total+int(var)
-            
-            print('________________________',total)
-            operate=0
-            var=''
-      if current_operation=='-'and operate==1:
-            total=total-int(var)
-            operate=0
-            var=''
-      if current_operation=='*'and operate==1:
-            total=total*int(var)
-            operate=0
-            var=''
-      if current_operation=='/'and operate==1:
-            total=total/int(var)
-            operate=0
-            var=''
-      '''
       if i in ['+','-','*','/','=']:
             ltotal.append(var)
             var=''
             ltotal.append(i)
-            print(ltotal)
-            
-            
-            '''
-            #operate=1
-            current_operation=i
-            if i=='+':
-                  total=total+int(var)
-                  var=''
-            if i=='-':
-                  total=total-int(var)
-                  var=''
-            total=total+int(var)
-            var=
-            '''
-      
-      else :
+      else:
             var=var+i
       print(i,'i')
       print(total,'total')
       print(var,'var')
 print (total)
-
-
-'''if '+' in v:
-      l=v.split('+')
-if '-' in l:
-      a,b=v.split('-')
-
-print(a)
-print(b)
-
-print(v)'''
+print(ltotal,'ltotal')
+total=0
+operation='+'
+if ltotal[1]=='':
+      ltotal.pop(1)
+for i in ltotal:
+      if i in ['+','-','*','/','=']:
+            operation=i
+      else:
+            if operation=='+':
+                  total=total+int(i)
+                  print(total)
+            if operation=='-':
+                  total=total-int(i)
+                  print(total)
+            if operation=='*':
+                  total=total*int(i)
+                  print(total)
+            if operation=='/':
+                  total=total/int(i)
+                  print(total)
+            if operation=='=':
+                  total=int(i)
+            
+            
