@@ -1,12 +1,14 @@
 from tkinter import*
 master=Tk()
 
+f=open('pb.txt','r')
 d={}
 
 
 
 def add():
     d[e1.get()]=e2.get()
+    
     print(d)
     e1.delete(0,END)
     e2.delete(0,END)
