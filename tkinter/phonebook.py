@@ -1,15 +1,31 @@
 from tkinter import*
 master=Tk()
-
-f=open('pb.txt','r')
 d={}
-
-
-
 def add():
     d[e1.get()]=e2.get()
-    
     print(d)
+    f=open('pb.txt','a')
+    f.write(e1.get())
+    f.write(':')
+    f.write(e2.get())
+    f.write('\n')
+    f.close()
+    '''for i in f:
+        print(i)
+        print(type(i),type(e1.get()))
+        print('i=',i,'e1=',e1.get())
+        if e1.get() in i:
+            print ('hello')
+            print (e1.get())
+            print('item already exists in file')
+        else:
+                fl=open('pb.txt','a')
+                print('item is not here')
+                
+    f.close()
+    '''
+    
+    
     e1.delete(0,END)
     e2.delete(0,END)
 def remove():
@@ -21,8 +37,19 @@ def remove():
 def show():
     e2.delete(0,END)
     x=e1.get()
-    print(d.get(x))
-    e2.insert(END,d.get(x))
+    f=open('pb.txt','r')
+    for  i in f:
+        if x in i:
+            i=i.strip()
+            for j in range(len(i)):
+                if i[j]==':':
+                    k=j
+            print(i[k+1:])
+                    
+            print(i[-1])
+    f.close()
+    #print(d.get(x))
+    #e2.insert(END,d.get(x))
 
 e1=Entry(master)
 e2=Entry(master)
@@ -34,12 +61,6 @@ b1=Button(master,text='add',command=add).grid(row=3,column=0)
 b2=Button(master,text='remove',command=remove).grid(row=3,column=1)
 b3=Button(master,text='show',command=show).grid(row=3,column=2)
 
-
-
-
-
-
-
-    
 while True:
     master.update()
+
