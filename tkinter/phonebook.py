@@ -1,9 +1,19 @@
 from tkinter import*
 master=Tk()
 d={}
+
+f=open('pb.txt','r')
+for n in f:
+    a,b=n.split(':')
+    print(a)
+    print(b)
+    d[a]=b
+    print(d)
+f.close()
+
+
 def add():
     d[e1.get()]=e2.get()
-    print(d)
     f=open('pb.txt','a')
     f.write(e1.get())
     f.write(':')
@@ -24,16 +34,22 @@ def add():
                 
     f.close()
     '''
-    
-    
     e1.delete(0,END)
     e2.delete(0,END)
-def remove():
-    e2.delete(0,END)
-    d.pop(e1.get())
     print(d)
+def remove():
+    print(d,'printing d')
+    print(e1.get(),'e1')
+    d.pop(e1.get())
+    print(d,'printing d')
     e1.delete(0,END)
     e2.delete(0,END)
+    f=open('pb.txt','w')
+    for n in d:
+        v=n +':'+ d[n]
+        f.write(v)
+        f.write('\n')
+    f.close()
 def show():
     e2.delete(0,END)
     x=e1.get()
@@ -45,8 +61,7 @@ def show():
                 if i[j]==':':
                     k=j
             print(i[k+1:])
-                    
-            print(i[-1])
+    e2.insert(END,i[k+1:])
     f.close()
     #print(d.get(x))
     #e2.insert(END,d.get(x))
