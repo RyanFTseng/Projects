@@ -11,7 +11,6 @@ for n in f:
     print(d)
 f.close()
 
-
 def add():
     d[e1.get()]=e2.get()
     f=open('pb.txt','a')
@@ -20,20 +19,6 @@ def add():
     f.write(e2.get())
     f.write('\n')
     f.close()
-    '''for i in f:
-        print(i)
-        print(type(i),type(e1.get()))
-        print('i=',i,'e1=',e1.get())
-        if e1.get() in i:
-            print ('hello')
-            print (e1.get())
-            print('item already exists in file')
-        else:
-                fl=open('pb.txt','a')
-                print('item is not here')
-                
-    f.close()
-    '''
     e1.delete(0,END)
     e2.delete(0,END)
     print(d)
@@ -63,8 +48,7 @@ def show():
             print(i[k+1:])
     e2.insert(END,i[k+1:])
     f.close()
-    #print(d.get(x))
-    #e2.insert(END,d.get(x))
+
 
 e1=Entry(master)
 e2=Entry(master)
