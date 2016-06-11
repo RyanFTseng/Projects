@@ -22,6 +22,7 @@ def add():
     e1.delete(0,END)
     e2.delete(0,END)
     print(d)
+    
 def remove():
     print(d,'printing d')
     print(e1.get(),'e1')
@@ -35,21 +36,13 @@ def remove():
         f.write(v)
         f.write('\n')
     f.close()
+    
 def show():
     e2.delete(0,END)
     x=e1.get()
-    f=open('pb.txt','r')
-    for  i in f:
-        if x in i:
-            i=i.strip()
-            for j in range(len(i)):
-                if i[j]==':':
-                    k=j
-            print(i[k+1:])
-    e2.insert(END,i[k+1:])
-    f.close()
+    e2.insert(0,d[x])
 
-
+        
 e1=Entry(master)
 e2=Entry(master)
 e1.grid(row=1,column=1)
