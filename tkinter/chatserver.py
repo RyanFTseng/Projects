@@ -1,35 +1,39 @@
 import socket
-host= '127.0.0.1'
-port=10502
+
 
 class socket:
     def _init_(self,ip,port):
-        self.s= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.bind((host,port))
+        try:
+            self.s= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.s.bind(('127.0.0.1',10502))
+        except:
+            conn.close()
     def listen(self):
-        self.s.listen(5)
+        try:
+            self.s.listen(5)
+        except:
+            conn.close()
     def accept(self):
-        self.conn, addr=s.accept()
-        print('connected by', addr)
+        try:
+            self.conn, addr=s.accept()
+            print('connected by', addr)
+        except:
+            conn.close()
     def senddata(self):
-        conn.sendall(data)
-        a=data.decode()
-        if len(a)>0:
-            print(a)
+        try:
+            conn.sendall(data)
+            a=data.decode()
+            if len(a)>0:
+                print(a)
+        except:
+            conn.close()
     def receivedata(self):
-        data= conn.recv(1024)
+        try:
+            data= conn.recv(1024)
+        except:
+            conn.close()
         
         
 
 
-try:
-    
-    while True:
-        
-        '''if not data: break'''
-        conn.sendall(data)
-        a=data.decode()
-        if len(a)>0:
-            print(a)
-except:
-    conn.close()
+
