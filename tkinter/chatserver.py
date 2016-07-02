@@ -1,18 +1,10 @@
 import socket
-
-
-class socket:
+class server:
     def _init_(self,ip,port):
-        try:
             self.s= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.s.bind(('127.0.0.1',10502))
-        except:
-            conn.close()
     def listen(self):
-        try:
             self.s.listen(5)
-        except:
-            conn.close()
     def accept(self):
         try:
             self.conn, addr=s.accept()
@@ -32,8 +24,8 @@ class socket:
             data= conn.recv(1024)
         except:
             conn.close()
-        
-        
+
+
 
 
 
