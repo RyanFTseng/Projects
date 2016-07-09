@@ -8,4 +8,5 @@ s.sendall(b'Hello,world')
 data=s.recv(1024)
 s.close()
 print('recieved',repr(data))
+
       

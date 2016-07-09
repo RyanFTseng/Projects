@@ -158,9 +158,7 @@ def game():
             
         if up:
             k1.moveup()
-            
         show_text("score:"+str(s),100,10,(100,220,0))
-
         if k1.y>480:
             k1.x=0
             k1.y=250
@@ -176,8 +174,6 @@ def game():
             s=0
             screen.fill((0,0,0))
             menu()
-
-
         if k1.x>640:
             s=s+50
             k1.x=0

@@ -19,6 +19,11 @@ e1=Entry(master)
 e1.grid(row=3,columnspan=5)
 l1=Label(master,text='').grid(row=1)
 b1=Button(master,text='enter',command=enter).grid(row=2,column=0)
+c=client()
+
+c.senddata()
+c.recievedata()
+
 
 while True:
         master.update()
