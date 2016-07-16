@@ -4,7 +4,7 @@ master=Tk()
 
 
 class client:
-    def _init_(self,ip,port):
+    def _init_(self):
         self.s= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.bind(('127.0.0.1',10502))
     def senddata(self):
