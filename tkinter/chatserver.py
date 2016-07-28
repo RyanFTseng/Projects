@@ -2,8 +2,6 @@ import socket
 
 class server:
     def _init_(self):
-        
-        
        self.socket.socket(socket.AF_INET, socket.SOCK_STREAM)
        self.bind(('127.0.0.1',10502))
        self.listen(1)
@@ -14,13 +12,13 @@ class server:
        if len(a)>0:
             print(a)
        self.conn.recv(1024)
-    #def listen1(self):
-      #  self.listen(1)
-    #def accept(self):
-           # conn, addr=self.accept()
-            #print('connected by', addr)
+'''def listen1(self):
+      self.listen(1)
+    def accept(self):
+           conn, addr=self.accept()
+            print('connected by', addr)
             
-'''   def senddata(self):
+  def senddata(self):
         self.conn.sendall(data)
         a=self.data.decode()
         if len(a)>0:
