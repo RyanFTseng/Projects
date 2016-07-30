@@ -9,8 +9,8 @@ while 1:
     localTime=strftime('%H:%M:%S',gmtime())
     s.sendto(("packet_time="+localTime).encode(),(host,port))
     print("sending packet..."+str(localTime))
-    Input=input('Input from client2:')
-    s.send((Input+'from client2').encode())
+    Input=input('Input from client1:')
+    s.send((Input+'from client1').encode())
     reserver_data=s.recv(1024)
     print('recieved from server:',reserver_data)
 s.close

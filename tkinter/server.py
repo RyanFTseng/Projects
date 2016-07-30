@@ -1,29 +1,28 @@
 import socket
-class server:
-    def _init_(self,ip,port):
-        self.s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.bind(('127.0.0.1',10502))
-    def listen(self):
-        self.s.listen(5)
-    def accept(self):
-        self.conn, addr=s.accept()
-        print('connected by', addr)
-    def senddata(self):
-        try:
-            self.conn.sendall(data)
-            a=data.decode()
-            if len(a)>0:
-                print(a)
-        except:
-            conn.close()
-    def receivedata(self):
-        try:
-            data= conn.recv(1024)
-        except:
-            conn.close()
-p=server()
-p.listen()
-p.accept()
-while True:
-    p.recievedata()
-    p.senddata()
+import time
+import os
+
+from threading import Thread
+host='127.0.0.1'
+port=5602
+s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.bind((host,port))
+s.listen(5)
+def clientThread():
+    conn,addr=s.accept()
+    print('got connection from',addr)
+    while 1:
+        data=conn.recv(1024)
+        print('get data',data)    
+        if not data:
+            time.sleep(1)
+            break
+        conn.sendall(data.upper())
+def myfunc(i):
+    print('sleeping 5 sec from thread', i)
+    time.sleep(1)
+    print('finished sleeping from thread')
+for i in range(5):
+    t=Thread(target=clientThread)
+    t.start()
+s.close()
