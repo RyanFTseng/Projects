@@ -4,7 +4,7 @@ import os
 
 from threading import Thread
 host='127.0.0.1'
-port=5602
+port=4256
 s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 s.bind((host,port))
 s.listen(5)
@@ -13,11 +13,12 @@ def clientThread():
     print('got connection from',addr)
     while 1:
         data=conn.recv(1024)
-        print('get data',data)    
+        print('get data',data)
         if not data:
             time.sleep(1)
             break
         conn.sendall(data.upper())
+        
 def myfunc(i):
     print('sleeping 5 sec from thread', i)
     time.sleep(1)
