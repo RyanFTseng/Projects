@@ -2,15 +2,17 @@ import socket
 from time import sleep,gmtime,strftime
 from tkinter import*
 import threading
+import time
 master=Tk()
 
 message=input('Client2: Enter message/Enter Exit:')
 message=message.encode()
 ip='0.0.0.0'
-port=19991
+port=18022
 def C():
     s.send(message)
     data=s.recv(10000)
+    time.sleep(0.01)
     print('client1 recieved data', data)
 s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 s.connect((ip,port))
@@ -21,7 +23,7 @@ t1.start()
 while 1:
     message=input('Client2: Enter message/ Enter exit:')
     message=message.encode()
-    t1.join
+    t1.join(message)
 
 
     
