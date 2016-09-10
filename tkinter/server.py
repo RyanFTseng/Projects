@@ -4,12 +4,22 @@ import os
 from threading import Thread
 from _thread import*
 import threading
+global ip
+global port
+global s
 
-ip='0.0.0.0'
-port=18022
-s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-s.bind((ip,port))
-s.listen(5)
+def socket():
+    import socket
+    ip='0.0.0.0'
+    port=18032
+    s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.bind((ip,port))
+    s.listen(5)
+    s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+    return s
+
+s = socket()
+    
 threads=[]
 c=[]
 class ClientThread(Thread):
@@ -39,35 +49,44 @@ class ClientThread(Thread):
     def send(self):
         message=input('Multithreaded Python server:Enter response from Server/Enter exit:')
         message=message.encode()
-        print(c)
+        print(c, len(c))
         for f in c:
             f.send(message)
-def t():
-    (conn,(ip,port))=s.accept()
+
+
+def t(conn):
+    #print("A")
+    #(conn,(ip,port))=s.accept()
     t=ClientThread('0.0.0.0',2004,conn)
     c.append(conn)
+    print(len(c))
     #t.start()
     #t.run()
+    t.send()
 
 
-s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+
 
 while 1:
     try:
         s.listen(4)
-        print(len(c))
-        t1=threading.Thread(target=t)
+        #print(len(c))
+        (conn,(ip,port))=s.accept()
+        print(ip, port)
+        t1=threading.Thread(target=t, args=(conn,))
         t1.start()
         #t1.run()
-        print('broadcast or chat?')
+        #print('broadcast or chat?')
         #bc = input()
-        print(len(c))
-        threads.append(t)
+        #print(len(c))
+        threads.append(t1)
     except:
+        #print("error")
         for connection in c:
             connection.close()
+        s.close()
     
 for i in threads:
     i.join()
 
-s.close()
+    

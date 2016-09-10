@@ -14,7 +14,7 @@ def C():
         #s.send(message)
         data=s.recv(10000)
         time.sleep(0.01)
-        print('client1 recieved data', data)
+        print('clients recieved data', data)
 try:        
     s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.connect((ip,port))

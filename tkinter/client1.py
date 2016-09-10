@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import socket
 import threading
 from time import sleep,gmtime,strftime
@@ -8,33 +9,39 @@ master=Tk()
     
 
 ip='0.0.0.0'
-port=18022
+port=18032
+ 
 def C():
-    s.send(message)
-    time.sleep(0.01)
-    data=s.recv(10000)
-    print('client 2 recieved data', data)
+    while True:
+    #s.send(message)
+        #time.sleep(0.01)
+        data=s.recv(10000)
+        if data!=b'':
+            print('client 2 recieved data', data)
 
     
-message=input('Client1: Enter message/Enter Exit:')
-message=message.encode()
-s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-s.connect((ip,port))
-t1=threading.Thread(target=C)
-t1.start()
+#message=input('Client1: Enter message/Enter Exit:')
+#message=message.encode()
+try:
+    s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.connect((ip,port))
+    t1=threading.Thread(target=C)
+    t1.start()
 
-while 1:
+except:
+    s.close()
+
+
+'''while 1:
     message=input('Client1 Enter message/ Enter exit:')
     message=message.encode()
-    t1.join(message)
+    t1.join(message)'''
 
 
 
 
 
 
-
-s.close()
 '''
 def enter():
     l1=Label(master,text='                                                                                                                                                                                                                                                                           ').grid(row=1)
