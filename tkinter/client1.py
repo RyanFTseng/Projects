@@ -8,14 +8,14 @@ master=Tk()
 
     
 
-ip='0.0.0.0'
+ip='localhost'
 port=18032
  
 def C():
     while True:
     #s.send(message)
         #time.sleep(0.01)
-        data=s.recv(10000)
+        data=s.recv(1024)
         if data!=b'':
             print('client 2 recieved data', data)
 
@@ -24,11 +24,14 @@ def C():
 #message=message.encode()
 try:
     s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    print('c')
     s.connect((ip,port))
+    print('connect')
     t1=threading.Thread(target=C)
     t1.start()
 
 except:
+    print('error')
     s.close()
 
 

@@ -10,7 +10,7 @@ global s
 
 def socket():
     import socket
-    ip='0.0.0.0'
+    ip=''
     port=18032
     s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.bind((ip,port))
@@ -57,7 +57,8 @@ class ClientThread(Thread):
 def t(conn):
     #print("A")
     #(conn,(ip,port))=s.accept()
-    t=ClientThread('0.0.0.0',2004,conn)
+    t=ClientThread(ip,port,conn)
+    print('a')
     c.append(conn)
     print(len(c))
     #t.start()
@@ -69,8 +70,10 @@ def t(conn):
 
 while 1:
     try:
+        print('wait')
         s.listen(4)
         #print(len(c))
+        print('waiting')
         (conn,(ip,port))=s.accept()
         print(ip, port)
         t1=threading.Thread(target=t, args=(conn,))

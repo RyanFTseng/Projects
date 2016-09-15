@@ -7,12 +7,12 @@ master=Tk()
 
 #message=input('Client2: Enter message/Enter Exit:')
 #message=message.encode()
-ip='0.0.0.0'
+ip='localhost'
 port=18032
 def C():
     while True:
         #s.send(message)
-        data=s.recv(10000)
+        data=s.recv(1024)
         time.sleep(0.01)
         print('client1 recieved data', data)
 try:        
