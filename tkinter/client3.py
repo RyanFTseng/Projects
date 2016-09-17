@@ -7,8 +7,8 @@ master=Tk()
 
 #message=input('Client2: Enter message/Enter Exit:')
 #message=message.encode()
-ip='0.0.0.0'
-port=18032
+ip='localhost'
+port=18039
 def C():
     while True:
         #s.send(message)
@@ -23,7 +23,8 @@ try:
 except:    
     s.close()
 
-#while message!='exit':
+
+    
 '''while 1:
     message=input('Client2: Enter message/ Enter exit:')
     message=message.encode()
