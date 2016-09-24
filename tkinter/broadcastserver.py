@@ -2,8 +2,6 @@ import socket
 import time
 import os
 from threading import Thread
-from _thread import*
-import threading
 global ip
 global port
 global s
@@ -15,7 +13,6 @@ c=[]
 #socket function
 def socket():
     try:
-        import socket
         ip=''
         port=18039
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -24,9 +21,9 @@ def socket():
         s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
         return s
     except:
-    for connection in c:
-        connection.close()
-    s.close()
+        for connection in c:
+            connection.close()
+        s.close()
 
 #create server thread
 class ClientThread(Thread):
