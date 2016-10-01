@@ -1,15 +1,22 @@
 import socket
 from threading import Thread
+import threading
 import os
-
+global ip
+global port
+global s
+global f
+c=[]
+threads=[]
 def socket():
     try:
         import socket
+        global f
         ip=''
         port=18039
         filename='ip.txt'
         mode='w'
-        f=File(filename,mode)
+        f=Filefunction(filename,mode)
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.bind((ip,port))
         s.listen(5)
@@ -20,27 +27,23 @@ def socket():
             connection.close()
         s.close()
 
-class File():
+class Filefunction():
     def __init__(self,filename,mode):
         self.filename=filename
         self.f=open(self.filename,mode)
-    
+        self.iplist=[]
     def writefile(self,a):
         self.f.write(a)
-        
     def readfile(self):
         for line in f:
-            print(f)
-            
+               iplist.append(f)
+        return iplist
     def appendfile(self,x):     
         self.f.append(x)
-    
-    
-
-
         
 class ClientThread(Thread):
     def __init__(self,ip,port,conn):
+        global f
         Thread.__init__(self)
         self.ip=ip
         self.port=port
@@ -55,4 +58,20 @@ class ClientThread(Thread):
             for a in c:
                 a.send(data)
                 time.sleep(0.01)
-                
+    def sendip(self):
+        while 1:
+            i=f.readfile()
+            for a in c:
+                a.send(','.join(i))
+s=socket()
+def create_thread(conn):
+    t=ClientThread(ip, port, conn)
+    c.append(conn)
+    t.sendip()
+    
+while 1:
+    s.listen(4)
+    (conn,(ip,port))=s.accept()
+    t1=threading.Thread(target=create_thread, args=(conn,))
+    t1.start()
+    threads.append(t1)

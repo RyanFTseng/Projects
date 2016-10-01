@@ -1,18 +1,15 @@
 import socket
 from threading import Thread
 from time import sleep,gmtime,strftime
-from tkinter import*
 import time
 
 ip='localhost'
 port=18039
-message=input('Client1: Enter message/Enter Exit:')
-message=message.encode()
-
-
 
 def C():
     while True:
+        message=input('Client1: Enter message/Enter Exit:')
+        message=message.encode()
         s.send(message)
         data=s.recv(1024)
         if data!=b'':
