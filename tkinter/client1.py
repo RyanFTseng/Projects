@@ -14,19 +14,18 @@ port=18039
  
 def C():
     while True:
-    #s.send(message)
-        #time.sleep(0.01)
         data=s.recv(1024)
         if data!=b'':
             print('client 2 recieved data', data)
 
-    
-#message=input('Client1: Enter message/Enter Exit:')
-#message=message.encode()
+
 try:
     s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    print('a')
     s.connect((ip,port))
+    print('b')
     t1=threading.Thread(target=C)
+    print('c')
     t1.start()
 
 except:

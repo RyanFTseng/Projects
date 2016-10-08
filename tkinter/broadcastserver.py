@@ -2,19 +2,16 @@ import socket
 import time
 import os
 from threading import Thread
-from _thread import*
-import threading
 global ip
 global port
-global s
-s = socket()
-z = []
-threads=[]
-c=[]
+
+#s=socket.socket()
+s=''
 
 #socket function
-def socket():
+def chatsocket():
     try:
+        global s
         import socket
         ip=''
         port=18039
@@ -24,9 +21,16 @@ def socket():
         s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
         return s
     except:
-    for connection in c:
-        connection.close()
-    s.close()
+        for connection in c:
+            connection.close()
+        s.close()
+
+chatsocket()
+z = []
+threads=[]
+c=[]
+
+
 
 #create server thread
 class ClientThread(Thread):
@@ -65,7 +69,7 @@ def create_thread(conn):
 
 while 1:
     try:
-        s.listen(4)
+        #s.listen(4)
         (conn,(ip,port))=s.accept()
         t1=threading.Thread(target=create_thread, args=(conn,))
         t1.start()
