@@ -1,80 +1,5 @@
-from threading import Thread
-<<<<<<< HEAD
-import socket
-import os
-import time
-from tkinter import*
-master=Tk()
-
- 
-ip='localhost'
-port=1234
-threads=[]
-c=[]
-ports=[1234,1235]
-sockets=[]
-t=[]
-class ClientThread(Thread):
-    def __init__(self,ip,port):
-        Thread.__init__(self)
-        self.ip=ip
-        self.port=port
-        self.s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        self.s.bind((ip,port))
-        self.s.listen(4)
-        self.conn=self.s.accept()[0]
-        self.s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
-        
-        print('[+] New server socket thread started for'+ip+':'+str(port))
-        self.run()
-    def run(self):
-        while 1:
-            print('aaaa')
-            data=self.conn.recv(10000)
-            if data==b'':
-                break
-            print('server recieved data:', data)
-            self.conn.send(data)
-
-#for port in ports:
- #   s.append(socket.socket(socket.AF_INET,socket.SOCK_STREAM))
-'''s0=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-s1=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-#s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-s0.bind((ip,1234))
-s1.bind((ip,1235))
-s1.listen(4)
-s0.listen(4)'''
-
-'''print('a')
-(conn,(ip,port))=s.accept()
-print('b')
-c.append(conn)'''
-print('Multithreaded Python server: Waiting for connections from TCP listens...')
-for port in ports:
-    t.append(ClientThread(ip,port))
-for n in t:
-    n.start()
-'''t=ClientThread(ip,port,conn)
-t.start()
-threads.append(t)'''
-
-'''s0.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
-s1.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)'''  
-for i in t:
-    i.join()
-
-
-    
-
-l1=Label(master,text=data).grid(row=0)
-
-
-while 1:
-    master.update()  
-#s.close()
-=======
 import threading
+from threading import Thread
 import os
 global ip
 global port
@@ -87,7 +12,7 @@ def socket():
         import socket
         global f
         ip=''
-        port=18039
+        port=1345
         filename='ip.txt'
         mode='w'
         f=Filefunction(filename,mode)
@@ -104,17 +29,19 @@ def socket():
 class Filefunction():
     def __init__(self,filename,mode):
         self.filename=filename
-        self.f=open(self.filename,mode)
+        self.mode=mode
         self.iplist=[]
     def writefile(self,a):
-        self.f.write(a)
+        with open(self.filename,'w') as file:
+            file.write(a)
     def readfile(self):
-        for line in f:
-               iplist.append(f)
-        return iplist
+        with open(self.filename,'r') as file:
+            for line in file:
+                self.iplist.append(line)
+        return self.iplist
     def appendfile(self,x):     
-        self.f.append(x)
-        
+        with open(self.filename,'a') as file:
+                  file.write(x) 
 class ClientThread(Thread):
     def __init__(self,ip,port,conn):
         global f
@@ -122,7 +49,8 @@ class ClientThread(Thread):
         self.ip=ip
         self.port=port
         self.conn=conn
-        f.writefile(ip)
+        f.writefile(ip+':'+str(port))
+        
         print('[+] New server socket thread started for'+ip+':'+str(port))
     def run(self):
         while 1:
@@ -135,11 +63,17 @@ class ClientThread(Thread):
     def sendip(self):
         while 1:
             i=f.readfile()
-            for a in c:
-                a.send(','.join(i))
+            k=','.join(i)
+            print(k)
+            print(c)
+            if k!='':
+                k=k.encode()
+                for a in c:
+                    a.send(k)
+            
 s=socket()
-def create_thread(conn):
-    t=ClientThread(ip, port, conn)
+def create_thread(conn,c):
+    t=ClientThread(ip,port,ssconn)
     c.append(conn)
     t.sendip()
     
@@ -149,4 +83,5 @@ while 1:
     t1=threading.Thread(target=create_thread, args=(conn,))
     t1.start()
     threads.append(t1)
->>>>>>> c27a161c42267739945eaadf3b403484edb46c41
+
+
