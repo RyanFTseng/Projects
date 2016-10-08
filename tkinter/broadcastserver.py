@@ -11,8 +11,11 @@ s=''
 #socket function
 def chatsocket():
     try:
+<<<<<<< HEAD
         global s
         import socket
+=======
+>>>>>>> c27a161c42267739945eaadf3b403484edb46c41
         ip=''
         port=18039
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -24,6 +27,7 @@ def chatsocket():
         for connection in c:
             connection.close()
         s.close()
+<<<<<<< HEAD
 
 chatsocket()
 z = []
@@ -31,6 +35,8 @@ threads=[]
 c=[]
 
 
+=======
+>>>>>>> c27a161c42267739945eaadf3b403484edb46c41
 
 #create server thread
 class ClientThread(Thread):
