@@ -5,26 +5,28 @@ global ip
 global port
 global s
 global f
+
 c=[]
 threads=[]
 def socket():
-    try:
-        import socket
-        global f
-        ip=''
-        port=1345
-        filename='ip.txt'
-        mode='w'
-        f=Filefunction(filename,mode)
-        s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        s.bind((ip,port))
-        s.listen(5)
-        s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
-        return s
-    except:
+   # try:
+    import socket
+    global f
+    ip='localhost'
+    port=9995
+    filename='ip.txt'
+    mode='w'
+    f=Filefunction(filename,mode)
+    s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.bind((ip,port))
+    s.listen(5)
+    s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+    return s
+    '''except:
+        print('a')
         for connection in c:
             connection.close()
-        s.close()
+        s.close()'''
 
 class Filefunction():
     def __init__(self,filename,mode):
@@ -64,24 +66,33 @@ class ClientThread(Thread):
         while 1:
             i=f.readfile()
             k=','.join(i)
-            print(k)
-            print(c)
             if k!='':
                 k=k.encode()
                 for a in c:
                     a.send(k)
+        def recieve(self):
+            print('adsde')
+            while 1:
+                for a in c:
+                    message=a.recv(1024)
+                    if data!=b'':
+                        print('server recieved message:'+message)
+        
             
 s=socket()
 def create_thread(conn,c):
-    t=ClientThread(ip,port,ssconn)
+    t=ClientThread(ip,port,conn)
+    rt=ClientThread(ip,port,conn)
     c.append(conn)
     t.sendip()
+    rt.recieve()
     
 while 1:
-    s.listen(4)
     (conn,(ip,port))=s.accept()
-    t1=threading.Thread(target=create_thread, args=(conn,))
+    t1=threading.Thread(target=create_thread, args=(conn,c))
+    rt=threading.Thread(target=create_thread, args=(conn,c))
     t1.start()
+    rt.start()
     threads.append(t1)
 
 

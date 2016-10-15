@@ -5,7 +5,7 @@ from time import sleep,gmtime,strftime
 import time
 
 ip='localhost'
-port=18039
+port=1345
 
 def C():
     while True:
