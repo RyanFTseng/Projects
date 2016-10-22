@@ -1,6 +1,7 @@
 import threading
 from threading import Thread
 import os
+import time
 global ip
 global port
 global s
@@ -12,7 +13,7 @@ def socket():
     import socket
     global f
     ip='localhost'
-    port=9993
+    port=4456
     filename='ip.txt'
     mode='w'
     f=Filefunction(filename,mode)
@@ -43,7 +44,14 @@ class Filefunction():
     def appendfile(self,x):     
         with open(self.filename,'a') as file:
                   file.write(x)
-    
+    def checkport(self,message):
+        with open(self.filename,'r') as file:
+            for line in file:
+                a,b=line.split(':')
+                if message==b:
+                    return True
+            return False
+        
 class ClientThread(Thread):
     def __init__(self,ip,port,conn):
         global f
@@ -78,11 +86,15 @@ class ClientThread(Thread):
                     message=a.recv(1024)
                     if message!=b'':
                         message=message.decode()
-                        print('server received message:'+message)
+                        print('server received message send:'+message)
+                        check=f.checkport(message)
+                        print(check)
+                        
     def receive(self):
-        print('adsde')
         while 1:
             for a in c:
+                print(self.recvport)
+                print('aaa')
                 if self.recvport==0:
                     recvport=a.recv(1024)
                     if recvport!=b'':
@@ -93,7 +105,7 @@ class ClientThread(Thread):
                     message=a.recv(1024)
                     if message!=b'':
                         message=message.decode()
-                        print('server received message:'+message)
+                        print('server received message receive:'+message)
         
 s=socket()
 global t
@@ -114,6 +126,7 @@ while 1:
     t1=threading.Thread(target=create_thread, args=(conn,c))
     rt1=threading.Thread(target=create_receive_thread, args=(conn,c))
     t1.start()
+    time.sleep(2)
     rt1.start()
     threads.append(t1)
 

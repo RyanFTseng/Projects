@@ -7,7 +7,7 @@ x=0
 def socket():
         import socket
         ip='localhost'
-        port=9993
+        port=4456
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.connect((ip,port))
         return s
@@ -28,7 +28,7 @@ def C():
                 else:
                         message=input('Client1: Enter message:')
                         message=message.encode()
-                        s.send(message)  
+                        s.send(message) 
 #try:
 t1=threading.Thread(target=C)
 t1.start()
