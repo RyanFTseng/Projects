@@ -7,13 +7,14 @@ global port
 global s
 global f
 c=[]
+d={}
 threads=[]
 def socket():
    # try:
     import socket
     global f
     ip='localhost'
-    port=4456
+    port=8325
     filename='ip.txt'
     mode='w'
     f=Filefunction(filename,mode)
@@ -47,8 +48,8 @@ class Filefunction():
     def checkport(self,message):
         with open(self.filename,'r') as file:
             for line in file:
-                a,b=line.split(':')
-                if message==b:
+                e,f=line.split(':')
+                if message==f:
                     return True
             return False
         
@@ -61,13 +62,18 @@ class ClientThread(Thread):
         self.conn=conn
         self.recvport=0
         self.sendport=0
-        f.writefile(ip+':'+str(port))
+        self.dict_port=0
+        d[self.port]=0
+        f.writefile('')
+        f.appendfile(ip+':'+str(port))
+        f.appendfile('\n')
         print('[+] New server socket thread started for'+ip+':'+str(port))
     def run(self):
         while 1:
             data=conn.recv(10000)
             print('server recieved data:', data)
             print('Multithreaded Python server: Waiting for connections from TCP listens...')
+            
             for a in c:
                 a.send(data)
                 time.sleep(0.01)
@@ -83,13 +89,25 @@ class ClientThread(Thread):
                 self.sendport=1
             else:
                 for a in c:
-                    message=a.recv(1024)
-                    if message!=b'':
-                        message=message.decode()
-                        print('server received message send:'+message)
-                        check=f.checkport(message)
-                        print(check)
-                        
+                    if self.dict_port==0:
+                        cport=a.recv(1024)
+                        if cport!=b'':
+                            cport=cport.decode()
+                            print('server received message send:'+cport)
+                            check=f.checkport(cport)
+                            self.dict_add(cport)
+                            print(check)
+                        self.dict_port=1
+                    else:
+                        message=a.recv(1024)
+                        if message!=b'':
+                            message=message.decode()
+                            print('server received message send:'+message)                        
+
+    def dict_add(self,cport):
+        if self.port!=cport:
+                d[self.port]=cport
+                
     def receive(self):
         while 1:
             for a in c:
