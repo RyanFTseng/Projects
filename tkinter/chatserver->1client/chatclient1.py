@@ -18,6 +18,7 @@ def send():
                 s.send(message)
 def receive():
         while 1:
+                print('ahfeiug')
                 message=s.recv(1024)
                 if message!=b'':
                         message=message.decode()
@@ -25,4 +26,5 @@ def receive():
 t1=threading.Thread(target=send)
 t2=threading.Thread(target=receive)
 t1.start()
+time.sleep(2)
 t2.start()

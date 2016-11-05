@@ -67,7 +67,6 @@ class ClientThread(Thread):
         self.sendport=0
         self.dict_port=0
         d[self.port]=0
-        self.message=''
         f.writefile('')
         f.appendfile(ip+':'+str(port))
         f.appendfile('\n')
@@ -94,10 +93,9 @@ class ClientThread(Thread):
                 self.sendport=1
             else:
                 for a in c:
-                    if self.message!='':
-                    #message=input('Server: Enter message:')
-                        message=message.encode()
-                        a.send(message)
+                    message=input('Server: Enter message:')
+                    message=message.encode()
+                    a.send(message)
             '''print('aaa')
             for a in c:
                 print('sss')
@@ -131,10 +129,10 @@ class ClientThread(Thread):
                         print('server received port:'+recvport)
                         self.recvport=1
                 else:'''
-                self.message=a.recv(1024)
-                if self.message!=b'':
-                    self.message=self.message.decode()
-                    print('server received message:'+self.message)
+                message=a.recv(1024)
+                if message!=b'':
+                    message=message.decode()
+                    print('server received message:'+message)
         
 s=socket()
 global t
