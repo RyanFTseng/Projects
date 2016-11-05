@@ -6,7 +6,7 @@ x=0
 def socket():
         import socket
         ip='localhost'
-        port=8340
+        port=8341
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.connect((ip,port))
         return s
