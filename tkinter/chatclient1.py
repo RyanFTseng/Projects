@@ -6,14 +6,15 @@ x=0
 def socket():
         import socket
         ip='localhost'
-        port=8341
+        port=8346
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.connect((ip,port))
         return s
 s=socket()
 def send():
         while 1:
-                message=input('Client1: Enter message:')
+                #message=input('Client1: Enter message:')
+                message = "hi client 1"
                 message=message.encode()
                 s.send(message)
 def receive():
@@ -25,4 +26,5 @@ def receive():
 t1=threading.Thread(target=send)
 t2=threading.Thread(target=receive)
 t1.start()
+time.sleep(2)
 t2.start()

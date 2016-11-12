@@ -7,31 +7,28 @@ x=0
 def socket():
         import socket
         ip='localhost'
-        port=8329
+        port=8346
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.connect((ip,port))
         return s
-    
 s=socket()
+def send():
+        while 1:
+                #message=input('Client2: Enter message:')
+                #message = "hi client 2"
+                message = "Hi"
+                message=message.encode()
+                s.send(message)
+def receive():
+        while 1:
+                print('receive')
+                message=s.recv(1024)
+                if message!=b'':
+                        message=message.decode()
+                        print('recieved message:'+message)
 
-def C():
-        global x
-        while True:
-                data=s.recv(1024)
-                if data!=b'':
-                    print('client 2 recieved data:', data)
-                if x==0:
-                        p=input('Enter port:')
-                        p=p.encode()
-                        s.send(p)
-                        x=1
-                else:
-                        message=input('Client2: Enter message:')
-                        message=message.encode()
-                        s.send(message) 
-#try:
-t1=threading.Thread(target=C)
+t1=threading.Thread(target=send)
+t2=threading.Thread(target=receive)
+t2.start()
+time.sleep(2)
 t1.start()
-#except:
-  #  print('error')
-    #s.close()

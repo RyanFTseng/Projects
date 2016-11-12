@@ -9,12 +9,13 @@ global f
 c=[]
 d={}
 threads=[]
+p=[]
 def socket():
    # try:
     import socket
     global f
     ip='localhost'
-    port=8340
+    port=8346
     filename='ip.txt'
     mode='w'
     f=Filefunction(filename,mode)
@@ -72,6 +73,8 @@ class ClientThread(Thread):
         f.appendfile(ip+':'+str(port))
         f.appendfile('\n')
         print('[+] New server socket thread started for'+ip+':'+str(port))
+        p.append(self.port)
+        
         
     def run(self):
         while 1:
@@ -96,8 +99,7 @@ class ClientThread(Thread):
                 for a in c:
                     if self.message!='':
                     #message=input('Server: Enter message:')
-                        message=message.encode()
-                        a.send(message)
+                        a.send(self.message)
             '''print('aaa')
             for a in c:
                 print('sss')
@@ -135,6 +137,21 @@ class ClientThread(Thread):
                 if self.message!=b'':
                     self.message=self.message.decode()
                     print('server received message:'+self.message)
+            for a in p:
+                if self.port!=a:
+                    #print(c)
+                    #print(len(c))
+                    for b in c:
+                        p1=b.getpeername()
+                        print(p1[1],a)
+                        if a==p1[1]:
+                            if type(self.message)==str:
+                                self.message=self.message.encode()
+                                if self.message!=b'':
+                                    b.send(self.message)
+                            else:
+                                if self.message!=b'':
+                                    b.send(self.message)
         
 s=socket()
 global t
