@@ -15,7 +15,7 @@ def socket():
     import socket
     global f
     ip='localhost'
-    port=8346
+    port=8356
     filename='ip.txt'
     mode='w'
     f=Filefunction(filename,mode)
@@ -86,7 +86,8 @@ class ClientThread(Thread):
                 time.sleep(0.01)
                 
     def sendip(self):
-        while 1:
+        pass
+        '''while 1:
             if self.sendport==0:
                 i=f.readfile()
                 k=','.join(i)
@@ -99,24 +100,23 @@ class ClientThread(Thread):
                 for a in c:
                     if self.message!='':
                     #message=input('Server: Enter message:')
-                        a.send(self.message)
-            '''print('aaa')
-            for a in c:
-                print('sss')
-                #if self.dict_port==0:
-                cport=a.recv(1024)
-                if cport!=b'':
-                    cport=cport.decode()
-                    print('server received message send:'+cport)
-                    check=f.checkport(cport)
-                    self.dict_add(cport)
-                    print(check)
-                self.dict_port=1
-                else:
-                    message=a.recv(1024)
-                    if message!=b'':
-                        message=message.decode()
-                        print('server received message send:'+message)  '''                      
+                        a.send(self.message)'''
+        '''for a in c:
+            print('sss')
+            #if self.dict_port==0:
+            cport=a.recv(1024)
+            if cport!=b'':
+                cport=cport.decode()
+                print('server received message send:'+cport)
+                check=f.checkport(cport)
+                self.dict_add(cport)
+                print(check)
+            self.dict_port=1
+            else:
+                message=a.recv(1024)
+                if message!=b'':
+                    message=message.decode()
+                    print('server received message send:'+message)  '''                      
 
     def dict_add(self,cport):
         if self.port!=cport:
@@ -125,6 +125,21 @@ class ClientThread(Thread):
     def receive(self):
         while 1:
             for a in c:
+                '''for q in p:
+                    if self.port!=q:
+                        #print(c)
+                        #print(len(c))'''
+                for b in c:
+                    p1=b.getpeername()
+                    print(p1[1],b)
+                            #if q==p1[1]:
+                    if type(self.message)==str:
+                        self.message=self.message.encode()
+                        if self.message!=b'':
+                            b.send(self.message)
+                    else:
+                        if self.message!=b'':
+                            b.send(self.message)
                 '''print(self.recvport)
                 if self.recvport==0:
                     recvport=a.recv(1024)
@@ -137,21 +152,7 @@ class ClientThread(Thread):
                 if self.message!=b'':
                     self.message=self.message.decode()
                     print('server received message:'+self.message)
-            for a in p:
-                if self.port!=a:
-                    #print(c)
-                    #print(len(c))
-                    for b in c:
-                        p1=b.getpeername()
-                        print(p1[1],a)
-                        if a==p1[1]:
-                            if type(self.message)==str:
-                                self.message=self.message.encode()
-                                if self.message!=b'':
-                                    b.send(self.message)
-                            else:
-                                if self.message!=b'':
-                                    b.send(self.message)
+            
         
 s=socket()
 global t
