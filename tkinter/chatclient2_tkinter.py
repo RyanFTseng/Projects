@@ -12,7 +12,7 @@ recvtxt=''
 def socket():
         import socket
         ip='localhost'
-        port=8356
+        port=8357
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.connect((ip,port))
         return s
@@ -45,11 +45,16 @@ def txt():
     sendthread()
 
 
-
-e1=Entry(master)
-e1.grid(row=1,column=1)
-b1=Button(master,text='send',command=txt).grid(row=1,column=2)
-l1=Label(master,text=recvtxt).grid(row=0)
-
+class chatwindow():
+        def __init__(self,master,s):
+                self.master=master
+                self.e1=Entry(self.master)
+                e1.grid(row=1,column=1)
+                self.b1=Button(self.master,text='send',command=txt).grid(row=1,column=2)
+                self.l1=Label(self.master,text='').grid(row=0)
+                self.master.createfilehandler(s, READABLE, self.ihandler)
+        def ihandler(self):
+                self.l1['text']=recieve()
+chatwindow()
 while True:
         master.update()

@@ -15,7 +15,7 @@ def socket():
     import socket
     global f
     ip='localhost'
-    port=8356
+    port=8367
     filename='ip.txt'
     mode='w'
     f=Filefunction(filename,mode)
@@ -24,12 +24,7 @@ def socket():
     s.listen(5)
     s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
     return s
-    '''except:
-        print('a')
-        for connection in c:
-            connection.close()
-        s.close()'''
-    
+
 class Filefunction():
     def __init__(self,filename,mode):
         self.filename=filename
@@ -125,14 +120,11 @@ class ClientThread(Thread):
     def receive(self):
         while 1:
             for a in c:
-                '''for q in p:
-                    if self.port!=q:
-                        #print(c)
-                        #print(len(c))'''
                 for b in c:
-                    p1=b.getpeername()
-                    print(p1[1],b)
+                    #p1=b.getpeername()
+                    #print(p1[1],b)
                             #if q==p1[1]:
+                    self.message='hello'
                     if type(self.message)==str:
                         self.message=self.message.encode()
                         if self.message!=b'':
@@ -140,14 +132,7 @@ class ClientThread(Thread):
                     else:
                         if self.message!=b'':
                             b.send(self.message)
-                '''print(self.recvport)
-                if self.recvport==0:
-                    recvport=a.recv(1024)
-                    if recvport!=b'':
-                        recvport=recvport.decode()
-                        print('server received port:'+recvport)
-                        self.recvport=1
-                else:'''
+               
                 self.message=a.recv(1024)
                 if self.message!=b'':
                     self.message=self.message.decode()
