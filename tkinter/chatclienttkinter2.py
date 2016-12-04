@@ -4,21 +4,50 @@ import queue
 from time import sleep,gmtime,strftime
 import time
 from tkinter import*
-
+master=Tk()
+x=0
+global a
+a=0
+txt=0
+global message
+global recvtxt
+global e1
+global window
+recvtxt=''
 def socket():
+        global ip
+        global port
         import socket
         ip='localhost'
-        port=3948
+        port=3955
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.connect((ip,port))
         return s
 global s
+
 s=socket()
 
+
 def addtowindow(recvtxt,window):
-    window.clear()
-    while 1:
-        window.write(recvtxt)
+    global ip
+    global port
+    #window.clear()
+    window.write(ip+" "+str(port)+':'+recvtxt+' '+'\n')
+    
+
+def send(message):
+        if type(message) == str:
+                message=message.encode()
+                s.send(message)
+        
+            
+
+def writewindow():
+    global e1
+    global window
+    m=e1.get()
+    send(m)
+    
 
 def receive(window):
     global recvtxt
@@ -26,10 +55,12 @@ def receive(window):
         print('b')
         recvtxt=s.recv(1024)
         if recvtxt!=b'':
-                recvtxt=recvtxt.decode()
-        #recvtxt='hello'
-                print('recieved message:'+recvtxt)
-                addtowindow(recvtxt,window)
+            recvtxt=recvtxt.decode()
+            print('recieved message:'+recvtxt)
+            addtowindow(recvtxt,window)
+            #l['text']=recvtxt
+            #chat.t1.set(recvtxt)
+
 
 class q(Text):
         def __init__(self,master,**options):
@@ -53,13 +84,14 @@ class q(Text):
             except queue.Empty:
                 pass
             self.after(100, self.update_me)
+            
 
-master=Tk()
 window = q(master)
 e1=Entry(master)
 e1.pack()
-b1=Button(master,text='send',command=addtowindow).pack()
+b1=Button(master,text='send',command=writewindow).pack()
 window.pack()
 t1=threading.Thread(target=receive, args=(window,))
 t1.start()
 master.mainloop()
+

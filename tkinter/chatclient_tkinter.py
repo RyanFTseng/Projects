@@ -1,6 +1,6 @@
 from threading import Thread
 import threading
-import Queue
+import queue
 from time import sleep,gmtime,strftime
 import time
 from tkinter import*
@@ -11,25 +11,43 @@ a=0
 txt=0
 global message
 global recvtxt
+global e1
+global window
 recvtxt=''
 def socket():
+        global ip
+        global port
         import socket
         ip='localhost'
-        port=8370
+        port=3955
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.connect((ip,port))
         return s
 global s
 s=socket()
 
-def send():
-    global message
-    global txt
-    message=txt
-    print(txt)
-    message=message.encode()
-    s.send(message)
-def receive(chat):
+
+def addtowindow(recvtxt,window):
+        global ip
+        global port
+        #window.clear()
+        window.write(ip+' '+str(port)+':'+recvtxt+' '+'\n')
+
+def send(message):
+        if type(message) == str:
+                message=message.encode()
+                s.send(message)
+            
+        
+
+def writewindow():
+    global e1
+    global window
+    m=e1.get()
+    send(m)
+    
+
+def receive(window):
     global recvtxt
     while 1:
         print('b')
@@ -37,78 +55,40 @@ def receive(chat):
         if recvtxt!=b'':
             recvtxt=recvtxt.decode()
             print('recieved message:'+recvtxt)
+            addtowindow(recvtxt,window)
             #l['text']=recvtxt
-            chat.t1.set(recvtxt)
+            #chat.t1.set(recvtxt)
+
 
 class q(Text):
-        def __init__(self,**options):
+        def __init__(self,master,**options):
                 Text.__init__(self,master,**options)
-                self.queue=Queue.Queue()
+                self.queue=queue.Queue()
                 self.update_me()
         def write(self,line):
                 self.queue.put(line)
         def clear(self):
                 self.queue.put(None)
         def update_me(self):
-                try:
-                        while 1:
-                                line=self.queue.get_nowait()
-                                if line is None:
-                                        self.delete(1.0,END)
-                                else:
-                                        self.insert(END, str(line))
-                                self.see(END)
-                                self.update_idletasks()
-                                except Queue.Empty:
-                                        pass
-                                self.after(100, self.update_me)
-        
-class chatwindow():
-        def __init__(self,master,s):
-                self.master=master
-                self.e1=Entry(self.master)
-                self.e1.pack()
-                print('a')
-                #self.b1=Button(self.master,text='send',command=txt).grid(row=1,column=2)
-                self.t1=  StringVar()
-                #Label(self.master,text=self.t1.get()).pack()
-                self.t1.set("Hello")
-                #self.ihandler()
-                master.mainloop()
-                #self.master.createfilehandler(s, READABLE, self.ihandler)
-        def ihandler(self):
-                print("ihandler")
-                #t2=threading.Thread(target=receive,args=(,))
-                #t2.start()
-                #a=1
+            try:
+                    while 1:
+                            line=self.queue.get_nowait()
+                            if line is None:
+                                    self.delete(1.0,END)
+                            else:
+                                    self.insert(END, str(line))
+                            self.see(END)
+                            self.update_idletasks()
+            except queue.Empty:
+                pass
+            self.after(100, self.update_me)
+            
 
-def Label(chat):               
-                print('label')
-                Label(chat.master,text=chat.t1.get()).pack()
-                chat.master.mainloop()
-                
-chat=chatwindow(master,s)
-t3=threading.Thread(target=Label,args=(chat,))
-t3.start()
-time.sleep(2)
-t2=threading.Thread(target=receive,args=(chat,))
-t2.start()
-
-def sendthread():
-    t1=threading.Thread(target=send)
-    t1.start()
-    time.sleep(2)
-#t2=threading.Thread(target=receive)
-#t2.start()
-
-def txt():
-    global txt
-    txt=e1.get()
-    print(txt)
-    sendthread()
-
-
-
-
-#while True:
-#        master.mainloop()
+window = q(master)
+e1=Entry(master)
+e1.pack()
+b1=Button(master,text='send',command=writewindow).pack()
+window.pack()
+t1=threading.Thread(target=receive, args=(window,))
+t1.start()
+master.mainloop()

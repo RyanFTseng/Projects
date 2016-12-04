@@ -15,7 +15,7 @@ def socket():
     import socket
     global f
     ip='localhost'
-    port=8370
+    port=3955
     filename='ip.txt'
     mode='w'
     f=Filefunction(filename,mode)
@@ -124,7 +124,8 @@ class ClientThread(Thread):
                     #p1=b.getpeername()
                     #print(p1[1],b)
                             #if q==p1[1]:
-                    self.message='hi'
+                    #sself.message=self.message.decode()
+                    print("Message",self.message)
                     if type(self.message)==str:
                         self.message=self.message.encode()
                         if self.message!=b'':

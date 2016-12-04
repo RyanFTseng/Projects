@@ -5,31 +5,40 @@ from time import sleep,gmtime,strftime
 import time
 from tkinter import*
 
+
 def socket():
         import socket
+        global ip
+        global port
         ip='localhost'
-        port=3948
+        port=8373
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.connect((ip,port))
+        print('connected to server'+ip+str(port))
         return s
 global s
 s=socket()
 
+def C():
+    while True:
+        data=s.recv(1024)
+        if data!=b'':
+            print('client recieved data', data)
+
+
 def addtowindow(recvtxt,window):
-    window.clear()
-    while 1:
-        window.write(recvtxt)
+        #window.clear()
+        window.write(ip+str(port)+':'+recvtxt+' ')
 
 def receive(window):
     global recvtxt
     while 1:
-        print('b')
         recvtxt=s.recv(1024)
         if recvtxt!=b'':
                 recvtxt=recvtxt.decode()
-        #recvtxt='hello'
                 print('recieved message:'+recvtxt)
                 addtowindow(recvtxt,window)
+                recvtxt=''
 
 class q(Text):
         def __init__(self,master,**options):
@@ -53,7 +62,7 @@ class q(Text):
             except queue.Empty:
                 pass
             self.after(100, self.update_me)
-
+            
 master=Tk()
 window = q(master)
 e1=Entry(master)
