@@ -1,9 +1,7 @@
 import re
-a='happyhappyhappyhappyhappy'
-b=re.match('happy',a).span()
-print(b)
+a='happyhappyhappyhappyhappyhappy'
+b=re.search('[happy{7}]',a)
 if b == None:
     print('not found')
 else:
     print('found')
-
