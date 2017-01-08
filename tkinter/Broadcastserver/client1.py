@@ -9,7 +9,7 @@ master=Tk()
     
 
 ip='localhost'
-port=18039
+port=8370
 
  
 def C():

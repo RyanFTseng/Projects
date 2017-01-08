@@ -2,9 +2,12 @@ import socket
 import time
 import os
 from threading import Thread
+import threading
 global ip
 global port
-
+z = []
+threads=[]
+c=[]
 #s=socket.socket()
 s=''
 
@@ -14,20 +17,20 @@ def chatsocket():
         global s
         import socket
         ip=''
-        port=18039
+        port=8373
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.bind((ip,port))
         s.listen(5)
         s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
         return s
     except:
+        print('aaa')
         for connection in c:
+            
             connection.close()
         s.close()
 chatsocket()
-z = []
-threads=[]
-c=[]
+
 
 
 #create server thread
@@ -38,7 +41,7 @@ class ClientThread(Thread):
         self.port=port
         self.conn=conn
         print('[+] New server socket thread started for'+ip+':'+str(port))
-    #recieve data
+#recieve data
     def run(self):
         while 1:
             data=conn.recv(10000)
@@ -47,7 +50,7 @@ class ClientThread(Thread):
             for a in c:
                 a.send(data)
                 time.sleep(0.01)
-    #broadcast
+#broadcast
     def send(self):
         while 1:
             message=input('Multithreaded Python server:Enter response from Server/Enter exit:')
@@ -66,17 +69,11 @@ def create_thread(conn):
         print('error')
 
 while 1:
-    try:
-        #s.listen(4)
-        (conn,(ip,port))=s.accept()
-        t1=threading.Thread(target=create_thread, args=(conn,))
-        t1.start()
-        threads.append(t1)
-    except:
-        for connection in c:
-            connection.close()
-        s.close()
-    
+    (conn,(ip,port))=s.accept()
+    t1=threading.Thread(target=create_thread, args=(conn,))
+    t1.start()
+    threads.append(t1)
+
 for i in threads:
     i.join()
 
