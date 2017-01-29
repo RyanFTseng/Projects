@@ -1,17 +1,27 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import ndimage as ndi
-from skimage import feature
+from skimage import feature,io
 
 im=np.zeros((128,128))
+print(im)
+
 im[32:-32,32:-32]=1
+
+
 im=ndi.rotate(im,15,mode='constant')
+#io.imshow(im)
+
 im=ndi.gaussian_filter(im,4)
+print(im)
 im+=0.2*np.random.random(im.shape)
-
+print(im,im.shape)
+#io.imshow(im)
 edges1=feature.canny(im)
-edges2=feature.canny(im,sigma=3)
 
+edges2=feature.canny(im,sigma=4)
+
+im
 fig,(ax1,ax2,ax3)=plt.subplots(nrows=1,ncols=3,figsize=(16,6),sharex=True,sharey=True)
 
 ax1.imshow(im,cmap=plt.cm.jet)
