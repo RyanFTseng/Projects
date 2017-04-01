@@ -10,10 +10,6 @@ for (int i=z-1;i>=0;i--){
 	y=y+x.charAt(i);
 	}
 
-
-System.out.print(x);
-System.out.print(y);
-
 if (y.equals(x)){
 	System.out.println("palindrome");
 	}
