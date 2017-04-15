@@ -1,14 +1,12 @@
 import java.util.Scanner;
-class stringindex{
+class beforeunicode{
 public static void main (String args[]){
 System.out.println("input string");
 Scanner in=new Scanner(System.in);
 String x=in.nextLine();
-System.out.println("input index");
-int i=in.nextInt();
-int index=x.charAt(i);
-
-System.out.println("The character at "+i+" is "+(char)index);
+System.out.println(x);
+int y=x.codePointBefore(1);
+System.out.println("unicode before index 1 = "+y);
 }
 }
 
