@@ -28,7 +28,7 @@ for (i=0;i<m;i++)
 
 
 
-System.out.println("sum");
+System.out.printlrn("sum");
 for(i=0;i<m;i++){
         for(j=0;j<n;j++)
 		System.out.print(sum[i][j]+"\t");
@@ -37,6 +37,4 @@ for(i=0;i<m;i++){
 	}
 }
 }
-
-
 
