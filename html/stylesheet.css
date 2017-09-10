@@ -1,17 +1,17 @@
 h1{
 	background-color:turquoise;
-	font-family:Verdana;
+	font-family:Arial;
 	color:#36648b;
 	text-align:center;
 }
 
 p{
-	font-family:Arial;
-	font-size:100px;	
+	font-family:Verdana;
+	font-size:20px;	
 }
 
 span{
 	color:blue;
-	font-size:100px;
+	font-size:20px;
 }
 
