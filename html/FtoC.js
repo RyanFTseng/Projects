@@ -4,13 +4,11 @@ function FtoC(F)
 	return C
 }
 
-
-
-
-
-
 function CtoF(C)
 {
 	var F=(C/.5556)+32
 	return F
 }
+
+var button1=document.getElementById('button id');
+button1.onclick=functio
