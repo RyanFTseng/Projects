@@ -14,9 +14,6 @@ function product(x,y)
 
 console.log(product(4,5));
 
-function dt =new Date();
-console.log(Date());
-
 
 
 

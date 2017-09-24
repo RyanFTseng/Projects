@@ -10,5 +10,3 @@ function CtoF(C)
 	return F
 }
 
-var button1=document.getElementById('button id');
-button1.onclick=functio

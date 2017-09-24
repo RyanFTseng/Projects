@@ -5,13 +5,18 @@
 </head>
 
 <body>
+	<p id = "enter"></p>
 	<select name = "conversion">
-	<option value="F to C">F to C</option>
-	<option value = "C to F">C to F</option>
-		</select>
+		<option value="F to C">F to C</option>
+		<option value = "C to F">C to F</option>
+	</select>
 	<input id="input1" type = "text">
 	<input id="input2" type = "text">
 	<input type="button" value = "enter">
+	<script>
+		var button1=document.getElementById("enter");
+		button1.onclick=function(){alert('hello');}
+	</script>
 
 </body>
 
