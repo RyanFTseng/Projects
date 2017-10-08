@@ -1,7 +1,7 @@
 from tkinter import*
 master=Tk()
 x=0
-def  one():
+def one():
     e1.insert(END,1)
 def two():
     e1.insert(END,2)

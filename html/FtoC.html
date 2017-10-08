@@ -1,28 +1,25 @@
 <html>
 <head>
 	<title>Conversion</title>
-	<script src= "FtoC.js" ></script>
 </head>
 
 <body>
-	<select name = "conversion">
-		<option value= "F to C" >F to C</option>
-		<option value = "C to F" >C to F</option>
-	</select>
-	<input id = "input1" type = "text">
-	<input id = "input2" type = "text">
-	<input id = "enter"  type = "button" value = "enter">
+	<h2>Farenheit Celcius Conversion</h2>
+	<p><input id = "c" onkeyup="convert('C')"> degrees Celcius</p>
+	<p><input id = "f" onkeyup="convert('F')"> degrees Farenheit</p>
+
 	
 	<script>
-
-	
-	
-	var textbox=document.getElementsByName("input1");
-	var value = textbox.innerHTML;
-	var button_1 = document.getElementById("enter");
-	button_1.onclick = function(){console.log(value);}
-
-
+	function convert(degree) {
+		var x;
+		if (degree =="C"){
+			x = document.getElementById("c").value*9/5+32;
+			document.getElementById("f").value=Math.round(x);
+		} else{
+			x= (document.getElementById("f").value-32)*5/9;
+			document.getElementById("c").value=Math.round(x);
+		}
+	}
 	</script>
 	
 </body>

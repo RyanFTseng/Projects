@@ -1,5 +1,3 @@
-
-
 function FtoC(F)
 {
 	var C=(F-32)*.5556
