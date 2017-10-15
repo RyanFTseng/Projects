@@ -1,7 +1,5 @@
-<html>
-<head>
-	<title>Calculator</title>
-</head>
+<title>Calculator</title>
+
 <body>
 	<h2>Calculator</h2>
 	<p><input id = "input"></p>
@@ -21,7 +19,7 @@
 		<input type = "button" value ="1" onclick="getElementById('input').value+='1'">
 		<input type = "button" value ="2" onclick="getElementById('input').value+='2'">
 		<input type = "button" value ="3" onclick="getElementById('input').value+='3'">
-		<input type = "button" value ="*" onclick="getElementById('input').value+='+'">
+		<input type = "button" value ="*" onclick="getElementById('input').value+='*'">
 	</p>
 	<p>
 		<input type = "button" value ="C" onclick="getElementById('input').value=''">
@@ -31,7 +29,10 @@
 	</p>
 	
 	<script>
-		function calc(input){
+		function calc(eq){
+    	var x = document.getElementById('input').value;
+		console.log(x);
+		}
 			
 			
 			
@@ -41,4 +42,4 @@
 	</script>
 
 </body>
-</html>
+
