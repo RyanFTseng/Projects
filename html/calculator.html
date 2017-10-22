@@ -4,41 +4,66 @@
 	<h2>Calculator</h2>
 	<p><input id = "input"></p>
 	<p>
-		<input type = "button" value ="7" onclick="getElementById('input').value+='7'">
-		<input type = "button" value ="8" onclick="getElementById('input').value+='8'">
-		<input type = "button" value ="9" onclick="getElementById('input').value+='9'">
-		<input type = "button" value ="+" onclick="getElementById('input').value+='+'">
+		<input type = "button" value ="7" onclick="numInput(7)">
+		<input type = "button" value ="8" onclick="numInput(8)">
+		<input type = "button" value ="9" onclick="numInput(9)">
+		<input type = "button" value ="+" onclick="operation('add')">
 	</p>
 	<p>
-		<input type = "button" value ="4" onclick="getElementById('input').value+='4'">
-		<input type = "button" value ="5" onclick="getElementById('input').value+='5'">
-		<input type = "button" value ="6" onclick="getElementById('input').value+='6'">
-		<input type = "button" value ="-" onclick="getElementById('input').value+='-'">
+		<input type = "button" value ="4" onclick="numInput(4)">
+		<input type = "button" value ="5" onclick="numInput(5)">
+		<input type = "button" value ="6" onclick="numInput(6)">
+		<input type = "button" value ="-" onclick="operation('sub')">
 	</p>
 	<p>
-		<input type = "button" value ="1" onclick="getElementById('input').value+='1'">
-		<input type = "button" value ="2" onclick="getElementById('input').value+='2'">
-		<input type = "button" value ="3" onclick="getElementById('input').value+='3'">
-		<input type = "button" value ="*" onclick="getElementById('input').value+='*'">
+		<input type = "button" value ="1" onclick="numInput(1)">
+		<input type = "button" value ="2" onclick="numInput(2)">
+		<input type = "button" value ="3" onclick="numInput(3)">
+		<input type = "button" value ="*" onclick="operation('mult')">
 	</p>
 	<p>
 		<input type = "button" value ="C" onclick="getElementById('input').value=''">
-		<input type = "button" value ="0" onclick="getElementById('input').value+='0'">
+		<input type = "button" value ="0" onclick="numInput(0)">
 		<input type = "button" value ="=" onclick="calc(getElementById('input').value)">
-		<input type = "button" value ="/" onclick="getElementById('input').value+='/'">
+		<input type = "button" value ="/" onclick="operation('div')">
 	</p>
 	
 	<script>
-		function calc(eq){
-    	var x = document.getElementById('input').value;
-		console.log(x);
-		console.log(parseInt(x,10))
-		}
-			
-			
-			
-	
-	
+
+			function numInput(num){
+      	var display = document.getElementById('input');
+        display.value+=num;
+      }
+      function operation(cmd){
+      var display = document.getElementById('input');
+      	if (cmd=='add'){
+        	var x = parseInt(display.value,10);
+       		display.value='';
+			var op = 1
+        	}
+        else if (cmd=='sub'){
+        	var x = parseInt(display.value,10);
+       		display.value='';
+			var op = 2
+        	}
+       	else if (cmd=='mult'){
+        	var x = parseInt(display.value,10);
+       		display.value='';
+			var op = 3
+        	}
+        else if (cmd=='div'){
+        	var x = parseInt(display.value,10);
+       		display.value='';
+			var op = 4
+        	}
+         }
+      function calc(right){
+      	var display = document.getElementById('input');
+        var y = parseInt(display.value,10);
+        if (op = 1){
+        	display.value=(x+y);
+          }
+        } 			
 		
 	</script>
 
