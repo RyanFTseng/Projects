@@ -23,7 +23,7 @@ def menu():
     show_text("Start",255,95,(0,0,0))
     show_text("Quit",255,295,(0,0,0))
     show_text("Kirby",250,25,(255,70,40))
-    show_text2("Developed by: Ryan Tseng",500,460,(255,255,255))
+    show_text2("Developed by: Saffcon",500,460,(255,255,255))
     while True:
         pygame.display.update()
         for event in pygame.event.get():
