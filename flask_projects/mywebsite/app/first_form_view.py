@@ -6,7 +6,6 @@ app.secret_key = 'my secret key'
 @app.route('/firstform', methods = ['GET', 'POST'])
 def first_form():
     form = FirstForm()
-
     if request.method == 'POST':
         if form.validate()==True:
             flash('All fields are required.')
