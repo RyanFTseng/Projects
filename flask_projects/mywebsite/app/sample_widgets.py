@@ -9,8 +9,7 @@ app.secret_key = 'my secret key'
 def samplewidgets():
     form = SampleWidgetsForm()
     if request.method =='POST':
-        response_message=("<H1>you selected the following values</H1>/Button Field: %s" % (form.sample_radio_field.data))
-        return (response_message)
+        return render_template('sample_widgets_response.html', form = form)
     else:
         return render_template('sample_widgets.html', form=form)
 

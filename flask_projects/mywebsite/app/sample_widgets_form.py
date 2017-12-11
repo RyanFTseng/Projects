@@ -10,7 +10,6 @@ class SampleWidgetsForm(FlaskForm):
                                                                          ('Java Language', 'Java')])
     sample_textarea_field = TextAreaField('Sample Text Area Field')
     
-    
     sample_password_field = PasswordField('Sample Text password Field')
 
     submit = SubmitField("Submit")
