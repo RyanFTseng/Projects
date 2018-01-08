@@ -14,7 +14,7 @@ c=conn.cursor()
 #c.execute('select count(customerid), country from customers group by country')
 #c.execute('select count(customerid), country from customers group by country order by count(customerid) desc')
 #c.execute('select count(shipperid) from orders group by shipperid') 
-c.execute('select count(country), country from customers group by country ')
+#c.execute('select count(country), country from customers group by country ')
 for n in c.fetchall():
     print(n)
 conn.commit()
