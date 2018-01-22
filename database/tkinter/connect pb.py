@@ -8,15 +8,15 @@ c=conn.cursor()
 
 first_name = StringVar()
 last_name = StringVar()
-email=StringVar()
-phone_number=StringVar()
+email = StringVar()
+phone_number = StringVar()
 
 def insert():
     first_name = f_name.get()
     last_name = l_name.get()
-    email = email.get()
+    email_address = email.get()
     phone_number = phonenumber.get()
-    c.execute('insert into phone_book(first_name,last_name,email,phone_number),values(?,?,?,?)',(first_name, last_name, email, phone_number))
+    c.execute('insert into phone_book(first_name,last_name,email,phone_number) values(?,?,?,?)',(first_name, last_name, email_address, phone_number))
     conn.commit()
 
 def read_from_db():
@@ -39,17 +39,16 @@ def del_record():
 def update_record():
     first=f_name.get()
     last=l_name.get()
-    email=email.get()
+    email_address=email.get()
     phone_number=phonenumber.get()
-    c.execute('update phone_book set first_name=?, last_name=?, email = ?, phonenumber=? where first_name =?',(first,last,email,phone_number,first,))
+    c.execute('update phone_book set first_name=?, last_name=?, email = ?, phone_number=? where first_name =?',(first,last,email_address,phone_number,first,))
     conn.commit()
 
 def clear():
     f_name.delete(0,END)
     l_name.delete(0,END)
-    email_address.delete(0,END)
+    email.delete(0,END)
     phonenumber.delete(0,END)
-
 
 f_name_label = Label(root,text="First name")
 f_name_label.grid(row=1,column=1)
@@ -72,7 +71,19 @@ phonenumber=Entry(root)
 phonenumber.grid(row=4,column=2)
 
 insert= Button(root,text="insert",command=insert)
-insert.grid(row=5, column = 2)
+insert.grid(row=5, column = 0)
+
+read=Button(root,text="read",command=read_from_db)
+read.grid(row=5,column = 1)
+
+delete=Button(root,text="delete",command=del_record)
+delete.grid(row=5,column=2)
+
+update=Button(root,text="update",command= update_record)
+update.grid(row = 5, column = 3)
+
+clear = Button(root,text = "clear", command = clear)
+clear.grid(row = 5, column = 4)
 
 root.mainloop()
 
